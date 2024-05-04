@@ -29,7 +29,7 @@ def compute_w_loader(output_path, loader, model, verbose = 0):
 		verbose: level of feedback
 	"""
 	if verbose > 0:
-		print(f'processing a total of {len(loader)} batches'.format(len(loader)))
+		print(f'processing a total of {len(loader)} batches')
 
 	mode = 'w'
 	for count, data in enumerate(tqdm(loader)):

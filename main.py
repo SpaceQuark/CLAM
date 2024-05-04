@@ -152,14 +152,24 @@ if args.model_type in ['clam_sb', 'clam_mb']:
 
 print('\nLoad Dataset')
 
+# if args.task == 'task_1_tumor_vs_normal':
+#     args.n_classes=2
+#     dataset = Generic_MIL_Dataset(csv_path = 'dataset_csv/tumor_vs_normal_dummy_clean.csv',
+#                             data_dir= os.path.join(args.data_root_dir, 'tumor_vs_normal_resnet_features'),
+#                             shuffle = False, 
+#                             seed = args.seed, 
+#                             print_info = True,
+#                             label_dict = {'normal_tissue':0, 'tumor_tissue':1},
+#                             patient_strat=False,
+#                             ignore=[])
 if args.task == 'task_1_tumor_vs_normal':
     args.n_classes=2
-    dataset = Generic_MIL_Dataset(csv_path = 'dataset_csv/tumor_vs_normal_dummy_clean.csv',
-                            data_dir= os.path.join(args.data_root_dir, 'tumor_vs_normal_resnet_features'),
+    dataset = Generic_MIL_Dataset(csv_path = 'dataset_csv/tumor_vs_normal_CAMELYON16_shuffle.csv',
+                            data_dir= os.path.join(args.data_root_dir, 'CAMELYON16_DATA_DIR'),
                             shuffle = False, 
                             seed = args.seed, 
                             print_info = True,
-                            label_dict = {'normal_tissue':0, 'tumor_tissue':1},
+                            label_dict = {'normal':0, 'tumor':1},
                             patient_strat=False,
                             ignore=[])
 

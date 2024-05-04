@@ -11,7 +11,7 @@ import pandas as pd
 from utils.utils import *
 from math import floor
 import matplotlib.pyplot as plt
-from datasets.dataset_generic import Generic_WSI_Classification_Dataset, Generic_MIL_Dataset, save_splits
+from dataset_modules.dataset_generic import Generic_WSI_Classification_Dataset, Generic_MIL_Dataset, save_splits
 import h5py
 from utils.eval_utils import *
 
@@ -32,6 +32,9 @@ parser.add_argument('--model_size', type=str, choices=['small', 'big'], default=
                     help='size of model (default: small)')
 parser.add_argument('--model_type', type=str, choices=['clam_sb', 'clam_mb', 'mil'], default='clam_sb', 
                     help='type of model (default: clam_sb)')
+parser.add_argument('--drop_out',action='store_true',default=0.25,
+                    help='whether model uses dropout')
+parser.add_argument('--embed_dim', type=int, default=1024)
 parser.add_argument('--k', type=int, default=10, help='number of folds (default: 10)')
 parser.add_argument('--k_start', type=int, default=-1, help='start fold (default: -1, last fold)')
 parser.add_argument('--k_end', type=int, default=-1, help='end fold (default: -1, first fold)')
@@ -68,13 +71,22 @@ with open(args.save_dir + '/eval_experiment_{}.txt'.format(args.save_exp_code), 
 f.close()
 
 print(settings)
+# if args.task == 'task_1_tumor_vs_normal':
+#     args.n_classes=2
+#     dataset = Generic_MIL_Dataset(csv_path = 'dataset_csv/tumor_vs_normal_dummy_clean.csv',
+#                             data_dir= os.path.join(args.data_root_dir, 'tumor_vs_normal_resnet_features'),
+#                             shuffle = False, 
+#                             print_info = True,
+#                             label_dict = {'normal_tissue':0, 'tumor_tissue':1},
+#                             patient_strat=False,
+#                             ignore=[])
 if args.task == 'task_1_tumor_vs_normal':
     args.n_classes=2
-    dataset = Generic_MIL_Dataset(csv_path = 'dataset_csv/tumor_vs_normal_dummy_clean.csv',
-                            data_dir= os.path.join(args.data_root_dir, 'tumor_vs_normal_resnet_features'),
+    dataset = Generic_MIL_Dataset(csv_path = 'dataset_csv/tumor_vs_normal_CAMELYON16_clean.csv',
+                            data_dir= os.path.join(args.data_root_dir, 'CAMELYON16_DATA_DIR'),
                             shuffle = False, 
                             print_info = True,
-                            label_dict = {'normal_tissue':0, 'tumor_tissue':1},
+                            label_dict = {'normal':0, 'tumor':1},
                             patient_strat=False,
                             ignore=[])
 

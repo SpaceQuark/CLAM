@@ -5,9 +5,12 @@ RESULTS_DIRECTORY
 FEATURES_DIRECTORY
 DATA_ROOT_DIR
 CORRUPT_IMGS
-splits
+eval_results
 heatmaps
 docs
 env
 ADDITIONAL
 ISSUES
+OUTPUT_FILES
+results
+splits

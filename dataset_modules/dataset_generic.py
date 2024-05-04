@@ -68,7 +68,8 @@ class Generic_WSI_Classification_Dataset(Dataset):
 		###shuffle data
 		if shuffle:
 			np.random.seed(seed)
-			np.random.shuffle(slide_data)
+			slide_data = slide_data.sample(frac=1)
+			# np.random.shuffle(slide_data)
 
 		self.slide_data = slide_data
 
